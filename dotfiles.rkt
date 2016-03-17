@@ -1,23 +1,28 @@
 #lang racket
 
-; requires
+; load required libs
 (require racket/file)
 
+; What this module provides
 (provide copy-dotfiles-from-profile*)
 
-(define alfafiles-home "alfafiles")
+; ****************
+;  IMPLEMENTATION
+; ****************
+
+(define alfafiles-home "alfafiles") ; home of alfafa profiles
 
 (define (path-to-profile profile)
-  (build-path (find-system-path 'home-dir) alfafiles-home profile))
+  (build-path (find-system-path 'home-dir) alfafiles-home profile)) ; A profile path looks like #<path:/Users/soapdog/alfafiles/nodejs-dev>
 
 (define (source-dotfiles-location-for-profile profile)
-  (build-path (path-to-profile profile) "dotfiles"))
+  (build-path (path-to-profile profile) "dotfiles")) ; Dotfiles are located in a folder called dotfiles inside the profile folder
 
 (define (destination-dotfiles-location)
   (cond
     [(eq? (system-type) 'macosx) (find-system-path 'home-dir)]
     [(eq? (system-type) 'unix) (find-system-path 'home-dir)]
-    [(eq? (system-type) 'windows) (find-system-path 'home-dir)]))
+    [(eq? (system-type) 'windows) (find-system-path 'home-dir)])) ; This is quite redundant, I know. I am just leaving it here in case I need to customize for different platforms
     
   
 (define (copy-dotfiles-from-profile* profile)
