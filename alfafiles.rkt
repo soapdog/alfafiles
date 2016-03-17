@@ -8,9 +8,9 @@
 
 (define install-profile
   (command-line
-   #:program "compiler"
+   #:program "alfafiles"
    #:once-each
-   [("-v" "--verbose") "Compile with verbose messages"
+   [("-v" "--verbose") "Execute with verbose messages"
                        (verbose-mode #t)]
    #:args (profile) ; expect one command-line argument: <filename>
    ; return the argument as a filename to compile
